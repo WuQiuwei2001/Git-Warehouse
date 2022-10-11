@@ -1,0 +1,107 @@
+.testimonial {
+    padding-bottom: 150px;
+
+    .center {
+        width: 80%;
+        margin: 0 auto;
+
+        >.red_font {
+            color: red;
+            text-align: center;
+        }
+
+        >.title {
+            text-align: center;
+            font-size: 30px;
+            margin: 20px 0 50px 0;
+        }
+
+        >.card {
+            width: 65%;
+            background-color: red;
+            box-sizing: border-box;
+            padding: 30px;
+            margin: 0 auto;
+            border-radius: 15px;
+
+            &::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+            >img,
+            >.right {
+                float: left;
+            }
+
+            >img {
+                display: block;
+                width: 80px;
+            }
+
+            >.right {
+                width: 80%;
+                color: #fff;
+                float: right;
+
+                >.top {
+                    >.name {
+                        font-size: 25px;
+                    }
+                }
+
+                >.job {
+                    color: gray;
+                    margin: 20px 0;
+                }
+            }
+        }
+
+        >.bottom {
+            width: 789.89px;
+            margin: 0 auto;
+
+            &::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+            >div {
+                width: 25%;
+                text-align: center;
+                float: left;
+                padding: 20px 0;
+
+                >p:first-child {
+                    font-size: 30px;
+                }
+            }
+
+            >.item:nth-child(1) {
+                >p:first-child {
+                    color: aqua;
+                }
+            }
+
+            >.item:nth-child(2) {
+                >p:first-child {
+                    color: orange;
+                }
+            }
+
+            >.item:nth-child(3) {
+                >p:first-child {
+                    color: green;
+                }
+            }
+
+            >.item:nth-child(4) {
+                >p:first-child {
+                    color: red;
+                }
+            }
+        }
+    }
+}

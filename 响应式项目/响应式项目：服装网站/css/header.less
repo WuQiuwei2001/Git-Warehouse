@@ -1,0 +1,150 @@
+.icon_up {
+    width: 35px;
+    height: 35px;
+    background-color: rgb(245, 71, 72);
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: $height;
+    border-radius: 25px;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+}
+
+header {
+    padding: 25px 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+
+    >nav {
+        width: 80%;
+        margin: 0 auto;
+        position: relative;
+
+        a {
+            color: #fff;
+        }
+
+        >.Logo,
+        >.center {
+            float: left;
+        }
+
+        >.search {
+            float: right;
+        }
+
+        &::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+        >.Logo {
+            height: 40px;
+            line-height: 40px;
+
+            a {
+                font-size: 30px;
+
+                >.bold {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        >.center {
+            height: 40px;
+            line-height: 40px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            &::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+            li {
+                float: left;
+                margin: 0 15px;
+
+                &:nth-child(1) a {
+                    color: red;
+                }
+
+                a {
+                    font-weight: bold;
+                    font-size: 14px;
+
+                    &:hover {
+                        color: red;
+                    }
+                }
+            }
+        }
+
+        >.search {
+            line-height: 40px;
+
+            &::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+            >.input_search {
+                float: left;
+
+                &::after {
+                    display: block;
+                    content: "";
+                    clear: both;
+                }
+
+                input {
+                    border-radius: 23px 0 0 23px;
+                    height: 40px;
+                    text-indent: 16px;
+                    box-sizing: border-box;
+                    border: none;
+                    float: left;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    color: #fff;
+
+                    &:placeholder-shown {
+                        font-size: 14px;
+                    }
+
+                    &::placeholder {
+                        color: #fff;
+                    }
+                }
+
+                >a {
+                    float: left;
+                    display: block;
+                    height: 40px;
+                    background-color: rgb(245, 71, 72);
+                    padding: 0 12px;
+                    border-radius: 0 23px 23px 0;
+                    color: #fff;
+                    transition: all 1s ease;
+
+                    &:hover {
+                        background-color: orange;
+                    }
+                }
+            }
+
+            >a {
+                float: left;
+                font-size: 20px;
+                margin-left: 15px;
+            }
+        }
+    }
+}

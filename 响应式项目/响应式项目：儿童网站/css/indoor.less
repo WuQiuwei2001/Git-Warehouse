@@ -1,0 +1,75 @@
+.indoor {
+    padding: 150px 0;
+
+    >.center {
+        width: 80%;
+        margin: 0 auto;
+        position: relative;
+
+        &::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+
+        >div {
+            width: 30%;
+            box-sizing: border-box;
+            color: #fff;
+            text-align: center;
+            padding: 60px 30px;
+            position: relative;
+            float: left;
+
+            >.icon {
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                border-radius: 50%;
+                font-size: 20px;
+                box-sizing: border-box;
+                position: absolute;
+                top: -25px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            >.title {
+                font-weight: bold;
+                margin: 10px 0;
+            }
+        }
+
+        >.left {
+            background-color: red;
+
+            >.icon {
+                background-color: red;
+            }
+
+        }
+
+        >.center {
+            background-color: orange;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            >.icon {
+                background-color: orange;
+            }
+
+        }
+
+        >.right {
+            background-color: rgb(22, 195, 176);
+            float: right;
+
+            >.icon {
+                background-color: rgb(22, 195, 176);
+            }
+
+        }
+    }
+}

@@ -1,0 +1,63 @@
+.photo-album {
+    display: flex;
+}
+
+.photo-album .left {
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.photo-album .left .item {
+    width: 33%;
+    height: 338px;
+    box-sizing: border-box;
+    padding-right: 10px;
+}
+
+.photo-album .left .item .content {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.photo-album .left .item:nth-child(1) .content {
+    background-image: url(../img/gallery-1.jpg);
+}
+
+.photo-album .left .item:nth-child(2) .content {
+    background-image: url(../img/gallery-2.jpg);
+}
+
+.photo-album .left .item:nth-child(3) .content {
+    background-image: url(../img/gallery-3.jpg);
+}
+
+.photo-album .left .item:nth-child(4) .content {
+    background-image: url(../img/gallery-5.jpg);
+}
+
+.photo-album .left .item:nth-child(5) .content {
+    background-image: url(../img/gallery-6.jpg);
+}
+
+.photo-album .left .item:nth-child(6) .content {
+    background-image: url(../img/gallery-1.jpg);
+}
+
+.photo-album .right {
+    width: 25%;
+    height: 696px;
+    margin-left: 5px;
+}
+
+.photo-album .right .item {
+    height: 100%;
+}
+
+.photo-album .right .item .content {
+    background-image: url('../img/gallery-4.jpg');
+    height: 100%;
+}

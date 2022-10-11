@@ -1,0 +1,80 @@
+.testimonial {
+  padding-bottom: 150px;
+}
+.testimonial .center {
+  width: 80%;
+  margin: 0 auto;
+}
+.testimonial .center > .red_font {
+  color: red;
+  text-align: center;
+}
+.testimonial .center > .title {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px 0 50px 0;
+}
+.testimonial .center > .card {
+  width: 65%;
+  background-color: red;
+  box-sizing: border-box;
+  padding: 30px;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+.testimonial .center > .card::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.testimonial .center > .card > img,
+.testimonial .center > .card > .right {
+  float: left;
+}
+.testimonial .center > .card > img {
+  display: block;
+  width: 80px;
+}
+.testimonial .center > .card > .right {
+  width: 80%;
+  color: #fff;
+  float: right;
+}
+.testimonial .center > .card > .right > .top > .name {
+  font-size: 25px;
+}
+.testimonial .center > .card > .right > .job {
+  color: gray;
+  margin: 20px 0;
+}
+.testimonial .center > .bottom {
+  width: 789.89px;
+  margin: 0 auto;
+}
+.testimonial .center > .bottom::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.testimonial .center > .bottom > div {
+  width: 25%;
+  text-align: center;
+  float: left;
+  padding: 20px 0;
+}
+.testimonial .center > .bottom > div > p:first-child {
+  font-size: 30px;
+}
+.testimonial .center > .bottom > .item:nth-child(1) > p:first-child {
+  color: aqua;
+}
+.testimonial .center > .bottom > .item:nth-child(2) > p:first-child {
+  color: orange;
+}
+.testimonial .center > .bottom > .item:nth-child(3) > p:first-child {
+  color: green;
+}
+.testimonial .center > .bottom > .item:nth-child(4) > p:first-child {
+  color: red;
+}
+/*# sourceMappingURL=./testimonial.css.map */

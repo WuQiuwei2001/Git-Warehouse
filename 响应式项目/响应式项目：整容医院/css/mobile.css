@@ -1,0 +1,121 @@
+        /*手机端样式 */
+        @media screen and (max-width:750px) {
+            body>header {
+                position: sticky;
+                top: 0;
+            }
+
+            body>header .top {
+                display: none;
+            }
+
+            body>header nav .content .navBar {
+                display: none;
+            }
+
+            body>header nav .content .Btn {
+                display: block;
+            }
+
+            .container .content {
+                width: 90%;
+            }
+
+            .banner .content {
+                width: 90%;
+            }
+
+            .banner .content .left {
+                width: 70%
+            }
+
+            .box .items {
+                justify-content: center;
+            }
+
+            .box .items .item {
+                width: 80%;
+            }
+
+            .container .main-section .item {
+                width: 80%;
+            }
+
+            .doctors>.cards {
+                justify-content: center;
+            }
+
+            .doctors>.cards>.card {
+                width: 85%;
+                margin: 15px 0;
+            }
+
+            .tips header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tips header a {
+                margin: 20px 0;
+            }
+
+            .tips .content {
+                justify-content: center;
+            }
+
+            .tips .content .item {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            /* 移动端隐藏pc端的相册 */
+            .photo-album {
+                display: none;
+            }
+
+            /* 移动端显示移动端的相册 */
+
+            .mobile-photo-album {
+                display: block;
+            }
+
+            footer .header .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer .header .content .search {
+                justify-content: center;
+                width: 90%;
+                margin: 40px 0;
+            }
+
+
+            footer .center .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            footer .center .content .left {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            footer .center .content .left>div {
+                margin-bottom: 15px
+            }
+
+            footer .center .content .right {
+                width: 100%;
+            }
+
+            footer .buttom .content {
+                flex-direction: column;
+            }
+
+            footer .buttom .content p {
+                text-align: center;
+                margin: 10px 0;
+            }
+        }

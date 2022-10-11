@@ -1,0 +1,57 @@
+        /* doctors的样式 */
+        .doctors {
+            padding: 80px 0;
+        }
+
+        .doctors .title {
+            text-align: center;
+        }
+
+        .doctors>.title>p {
+            font-size: small;
+            font-weight: bold;
+            color: gray;
+        }
+
+        .doctors>.title>h1 {
+            font-weight: bold;
+            font-size: xx-large;
+            margin: 10px 0 50px 0;
+        }
+
+        .doctors>.cards {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .doctors>.cards>.card {
+            width: 30%;
+            text-align: center;
+        }
+
+        .doctors>.cards>.card img {
+            border: 10px solid whitesmoke;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            width: 70%;
+        }
+
+        .doctors>.cards>.card .name {
+            font-weight: bold;
+        }
+
+        .doctors>.cards>.card img:hover {
+            border: 10px solid rgb(10, 231, 205);
+            box-shadow: 0px 5px 30px rgb(0 0 0 / 10%);
+        }
+
+        .doctors>.cards>.card .plastic {
+            margin: 8px 0;
+        }
+
+        .doctors>.cards>.card .icons i {
+            margin: 0 5px;
+        }

@@ -1,0 +1,126 @@
+.icon_up {
+  width: 35px;
+  height: 35px;
+  background-color: #f54748;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 25px;
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+}
+header {
+  padding: 25px 0;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+header > nav {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+header > nav a {
+  color: #fff;
+}
+header > nav > .Logo,
+header > nav > .center {
+  float: left;
+}
+header > nav > .search {
+  float: right;
+}
+header > nav::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > nav > .Logo {
+  height: 40px;
+  line-height: 40px;
+}
+header > nav > .Logo a {
+  font-size: 30px;
+}
+header > nav > .Logo a > .bold {
+  font-weight: bold;
+}
+header > nav > .center {
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+header > nav > .center::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > nav > .center li {
+  float: left;
+  margin: 0 15px;
+}
+header > nav > .center li:nth-child(1) a {
+  color: red;
+}
+header > nav > .center li a {
+  font-weight: bold;
+  font-size: 14px;
+}
+header > nav > .center li a:hover {
+  color: red;
+}
+header > nav > .search {
+  line-height: 40px;
+}
+header > nav > .search::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > nav > .search > .input_search {
+  float: left;
+}
+header > nav > .search > .input_search::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > nav > .search > .input_search input {
+  border-radius: 23px 0 0 23px;
+  height: 40px;
+  text-indent: 16px;
+  box-sizing: border-box;
+  border: none;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+header > nav > .search > .input_search input:placeholder-shown {
+  font-size: 14px;
+}
+header > nav > .search > .input_search input::placeholder {
+  color: #fff;
+}
+header > nav > .search > .input_search > a {
+  float: left;
+  display: block;
+  height: 40px;
+  background-color: #f54748;
+  padding: 0 12px;
+  border-radius: 0 23px 23px 0;
+  color: #fff;
+  transition: all 1s ease;
+}
+header > nav > .search > .input_search > a:hover {
+  background-color: orange;
+}
+header > nav > .search > a {
+  float: left;
+  font-size: 20px;
+  margin-left: 15px;
+}
+/*# sourceMappingURL=./header.css.map */

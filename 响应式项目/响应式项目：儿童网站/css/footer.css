@@ -1,0 +1,106 @@
+footer {
+  background-color: #343a40;
+  padding: 150px 0;
+}
+footer > .center {
+  width: 80%;
+  margin: 0 auto;
+}
+footer > .center > .top {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 100px;
+}
+footer > .center > .top::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+footer > .center > .top > .left {
+  width: 30%;
+  float: left;
+}
+footer > .center > .top > .left .item > .title {
+  color: red;
+  margin-bottom: 20px;
+}
+footer > .center > .top > .left .item:nth-child(1) {
+  margin-bottom: 40px;
+}
+footer > .center > .top > .left .item:nth-child(1) > .article {
+  color: #fff;
+}
+footer > .center > .top > .left .item:nth-child(2) > .search {
+  position: relative;
+}
+footer > .center > .top > .left .item:nth-child(2) > .search::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+footer > .center > .top > .left .item:nth-child(2) > .search > input {
+  display: block;
+  width: 180px;
+  text-indent: 10px;
+  border-radius: 5px;
+  height: 40px;
+  float: left;
+  border: none;
+}
+footer > .center > .top > .left .item:nth-child(2) > .search > .btn {
+  width: 60px;
+  text-align: center;
+  background-color: red;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  border-radius: 25px;
+  font-size: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 100px;
+  transform: translateY(-50%);
+}
+footer > .center > .top > .left .item:nth-child(2) > .search > .btn:hover {
+  background-color: rgba(200, 21, 21, 0.64);
+}
+footer > .center > .top > .right {
+  width: 50%;
+  float: right;
+}
+footer > .center > .top > .right::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+footer > .center > .top > .right > div {
+  width: 40%;
+}
+footer > .center > .top > .right > div > p {
+  color: red;
+  margin-bottom: 20px;
+}
+footer > .center > .top > .right > div > ul li {
+  margin-bottom: 10px;
+}
+footer > .center > .top > .right > div > ul li > a {
+  color: #fff;
+}
+footer > .center > .top > .right > div > ul li > a:hover {
+  color: #cac7c7;
+}
+footer > .center > .top > .right > .L {
+  float: left;
+}
+footer > .center > .top > .right > .R {
+  float: right;
+}
+footer > .center > .down {
+  padding: 50px 0;
+}
+footer > .center > .down > p {
+  text-align: center;
+  color: #fff;
+}
+/*# sourceMappingURL=./footer.css.map */
