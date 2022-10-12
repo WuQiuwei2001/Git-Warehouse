@@ -1,69 +1,118 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title>倒计时</title>
+		<meta charset="utf-8">
+		<title>翻页时钟</title>
 		<style type="text/css">
 			* {
 				margin: 0;
 				padding: 0;
 			}
 
-			.box {
-				text-align: center;
-				width: 220px;
+			#clock {
+				width: 500px;
+				margin: 0 auto;
 				height: 100px;
-				border: 5px double #000000;
-				margin: 100px auto;
-				border-radius: 25px;
 				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: column;
 			}
 
-			p span {
+			#clock>section {
+				width: 20%;
+				color: #FFFFFF;
 				font-weight: bold;
-				margin: 0 5px;
+				display: flex;
+				overflow: hidden;
+				margin: 0 10px;
+			}
+
+			#clock>section>span {
+				width: 50%;
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				height: 100px;
+			}
+
+			#clock>section>span>span {
+				height: 100px;
+				width: 100%;
+				line-height: 100px;
+				border: #000000 1px solid;
+				font-size: 20px;
+				box-sizing: border-box;
+				background-color: #FFA500;
+			}
+
+			#clock>section>span>span {
+				/* margin-top: -100px; */
+				transition: all 0.5s;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="box">
-			<p><span class="d"></span><span class="h"></span><span class="m"></span><span class="s"></span></p>
+		<div id="clock">
+			<section class="hh">
+				<span class="h1">
+					<span></span>
+				</span>
+				<span class="h2">
+					<span></span>
+				</span>
+			</section>
+			<section class="mm">
+				<span class="m1">
+					<span></span>
+				</span>
+				<span class="m2">
+					<span></span>
+				</span>
+			</section>
+			<section class="ss">
+				<span class="s1">
+					<span></span>
+				</span>
+				<span class="s2">
+					<span></span>
+				</span>
+			</section>
 		</div>
 		<script type="text/javascript">
-			let domD = document.querySelector('.box .d');
-			let domH = document.querySelector('.box .h');
-			let domM = document.querySelector('.box .m');
-			let domS = document.querySelector('.box .s');
+		
+		
+			function showTime(span, time) {
 
-			function daoJi(date) {
-				// 获取2022-09-01的时间对象的时间戳
-				let future = new Date(date).getTime();
-				// 获取当前时间的时间戳
-				let now = Date.now();
-				// 未来与当前的差
-				let dif = future - now;
+				let firstChild = span.querySelector('span:first-child');
+				// 添加新的span
+				let newChild = document.createElement('span');
 
-				// 获取倒计时的'时'
-				let d = dif / 1000 / 60 / 60 / 24;
+				if (firstChild.innerHTML != time) {
+					newChild.innerHTML = time;
+					span.appendChild(newChild);
 
-				let h = (d - parseInt(d)) * 24;
+					firstChild.style.marginTop = "-100px";
 
-				let m = (h - parseInt(h)) * 60;
+					setTimeout(() => {
+						span.removeChild(firstChild);
+					}, 500);
+				}
 
-				let s = (m - parseInt(m)) * 60;
-
-				domD.innerText = parseInt(d) < 10 ? '0' + parseInt(d) + " 天" : parseInt(d) + " 天";
-				domH.innerText = parseInt(h) < 10 ? '0' + parseInt(h) + " 时" : parseInt(h) + " 时";
-				domM.innerText = parseInt(m) < 10 ? '0' + parseInt(m) + " 分" : parseInt(m) + " 分";
-				domS.innerText = parseInt(s) < 10 ? '0' + parseInt(s) + ' 秒' : parseInt(s) + ' 秒';
 			}
 
 			setInterval(() => {
-				daoJi('2022/09/01');
-			}, 500);
+				let now = new Date();
+				let hh = now.getHours() < 10 ? '0' + now.getHours() : '' + now.getHours();
+				let mm = now.getMinutes() < 10 ? '0' + now.getMinutes() : '' + now.getMinutes();
+				let ss = now.getSeconds() < 10 ? '0' + now.getSeconds() : '' + now.getSeconds();
+
+				showTime(document.querySelector('.h1'), hh[0]);
+				showTime(document.querySelector('.h2'), hh[1]);
+
+				showTime(document.querySelector('.m1'), mm[0]);
+				showTime(document.querySelector('.m2'), mm[1]);
+
+				showTime(document.querySelector('.s1'), ss[0]);
+				showTime(document.querySelector('.s2'), ss[1]);
+			}, 1000);
 		</script>
 	</body>
 </html>
