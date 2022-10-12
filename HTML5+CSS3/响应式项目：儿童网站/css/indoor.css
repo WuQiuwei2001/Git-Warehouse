@@ -1,0 +1,62 @@
+.indoor {
+  padding: 150px 0;
+}
+.indoor > .center {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+.indoor > .center::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.indoor > .center > div {
+  width: 30%;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  padding: 60px 30px;
+  position: relative;
+  float: left;
+}
+.indoor > .center > div > .icon {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.indoor > .center > div > .title {
+  font-weight: bold;
+  margin: 10px 0;
+}
+.indoor > .center > .left {
+  background-color: red;
+}
+.indoor > .center > .left > .icon {
+  background-color: red;
+}
+.indoor > .center > .center {
+  background-color: orange;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.indoor > .center > .center > .icon {
+  background-color: orange;
+}
+.indoor > .center > .right {
+  background-color: #16c3b0;
+  float: right;
+}
+.indoor > .center > .right > .icon {
+  background-color: #16c3b0;
+}
+/*# sourceMappingURL=./indoor.css.map */

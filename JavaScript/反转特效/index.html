@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>反转特效</title>
+		<style type="text/css">
+			#card {
+				width: 100px;
+				height: 150px;
+				position: relative;
+				transform-style: preserve-3d;
+				perspective: 300px;
+			}
+
+			/* 
+			在css3中，可以利用backface-visibility属性，通过给元素添加 “backface-visibility: hidden;”
+			样式来设置背面不可见。backface-visibility属性可以设置当元素不面向屏幕时是否可见。 
+			*/
+			#card>.before,
+			#card>.after {
+				width: 100%;
+				height: 150px;
+				background-color: #0000FF;
+				color: white;
+				border-radius: 5px;
+				text-align: center;
+				line-height: 150px;
+				font-size: 2em;
+				font-weight: bold;
+				position: absolute;
+				top: 0;
+				left: 0;
+				backface-visibility: hidden;
+				transition: all 1s ease;
+			}
+
+			#card>.after {
+				transform: rotateY(-180deg);
+			}
+
+			#card:hover>.before {
+				transform: rotateY(180deg);
+			}
+
+			#card:hover>.after {
+				transform: rotateY(0);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="card">
+			<div class="before">
+				正
+			</div>
+			<div class="after">
+				反
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手风琴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            display: flex;
+            height: 70px;
+            background-color: black;
+            justify-content: center;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .box>.item {
+            width: 70px;
+            position: relative;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .box>.item img {
+            width: 100%;
+        }
+
+        .box>.item>div {
+            height: 70px;
+            position: absolute;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .box>.item>.longImg {
+            width: 0px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .box>.item>.shortImg {
+            width: 70px;
+            background-size: 100%;
+        }
+
+        .box>.active {
+            width: 224px;
+        }
+
+        .box>.active>.shortImg {
+            width: 0;
+        }
+
+        .box>.active>.longImg {
+            width: 224px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="item active">
+            <div class="longImg">
+                <img src="./img/手风琴/126-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/126.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/127-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/127.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/131-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/131.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/173-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/173.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/507-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/507.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/525-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/525.webp">
+            </div>
+        </div>
+        <div class="item">
+            <div class="longImg">
+                <img src="./img/手风琴/531-freehover.png">
+            </div>
+            <div class="shortImg">
+                <img src="./img/手风琴/531.webp">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let items = document.querySelectorAll('.box>.item');
+
+        items.forEach((v, i) => {
+            v.onmouseover = function () {
+                items.forEach((v, i) => {
+                    if (v !== this) {
+                        v.classList.remove('active');
+                    } else {
+                        v.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

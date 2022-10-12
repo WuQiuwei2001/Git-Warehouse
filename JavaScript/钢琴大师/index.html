@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钢琴大师</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            background-image: url('./img/bg.png');
+            background-size: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 音符的通用样式 */
+        .page>.note {
+            width: 25vw;
+            height: 25vw;
+            background-size: contain;
+            border-radius: 10px;
+            position: absolute;
+            transition: all 1s ease;
+        }
+
+        /*没点击时方块显示的图片  */
+        .dontClick {
+            background-image: url('./img/note02.png');
+        }
+
+        /*点击时方块显示的图片  */
+        .click {
+            background-image: url('./img/note03.png');
+        }
+
+        /* 错误音符的图标 */
+        .errorNote {
+            background-image: url('./img/errorNote.png');
+        }
+
+        .score {
+            width: 100%;
+            font-size: 3em;
+            font-weight: bold;
+            position: absolute;
+            text-align: center;
+            color: orange;
+            z-index: 10;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="score">0</div>
+    <div class="page"></div>
+
+    <script>
+        let music = [
+            // 第一首歌的谱子
+            [
+                25, 21, 22, 23, 24, 25, 21, 21, 26, 24, 25, 26, 27, 31, 21, 21, 24, 25, 24, 23, 22, 23, 24, 23, 22, 21, 17,
+                21, 22, 23, 21, 22, 25, 21, 22, 23, 24, 25, 21, 21, 26, 24, 25, 26, 27, 31, 21, 21, 24, 25, 24, 23, 22, 23,
+                24, 23, 22, 21, 22, 23, 22, 21, 17, 21
+            ],
+            [
+                23, 22, 21, 17, 16, 15, 16, 17, 21, 17, 16, 15, 14, 13, 14, 12, 21, 17, 21, 11, 7, 15, 12, 13, 11, 21, 17, 16,
+                17, 23, 25, 26, 24, 23, 22, 24, 24, 23, 21, 17, 16, 15, 14, 13, 12, 14, 13, 12, 11, 12, 13, 14, 15, 12, 15,
+                14, 13, 16, 15, 14, 15, 14, 13, 12, 11, 6, 16, 17, 21, 17, 16, 15, 14, 13, 12, 16, 15, 16, 15, 14, 13, 23, 22,
+                21, 22, 21, 23, 22, 24, 25, 23, 24, 25, 23, 24, 25, 15, 16, 17, 21, 22, 23, 24, 23, 21, 22, 23, 13, 14, 15,
+                16, 15, 14, 15, 13, 14, 15, 14, 16, 15, 14, 13, 12, 13, 12, 11, 12, 13, 14, 15, 16, 14, 16, 15, 16, 17, 21,
+                15, 16, 17, 21, 22, 23, 24, 25, 23, 21, 22, 23, 22, 21, 22, 17, 21, 22, 23, 22, 21, 17, 21, 16, 17, 21, 11,
+                12, 13, 14, 13, 12, 13, 21, 17, 21, 16, 21, 17, 16, 15, 14, 15, 14, 13, 14, 15, 16, 17, 11, 16, 21, 17, 21,
+                17, 16, 17, 21, 22, 21, 17, 21, 16, 17, 23, 13, 14, 13, 12, 22, 23, 22, 21, 13, 11, 16, 15, 5, 4, 5, 6, 16,
+                17, 16, 17, 5, 4, 5, 6, 16, 15, 16, 17, 17, 16, 17, 11, 21, 22, 21, 17, 7, 11, 7, 6, 16, 15, 16, 17, 7, 13,
+                12, 11, 21, 22, 24, 23, 13, 15, 23, 21, 24, 23, 24, 22, 15, 14, 15, 13, 21, 17, 21, 13, 15, 15, 16, 17, 15,
+                13, 21, 22, 23, 21, 23, 23, 22, 21, 17, 16, 16, 15, 16, 17, 21, 23, 22, 21, 23
+            ]
+        ];
+        // 创建一个新的方格
+        function createNote() {
+            let newNote = document.createElement('div');
+            newNote.classList.add('note');
+            newNote.style.top = -25 + 'vw';
+            newNote.style.left = Math.floor(Math.random() * 4) * 25 + 'vw';
+            // [0-1]之间的随机整数
+            let num = Math.floor(Math.random() * 2);
+            // 如果是0，则为错误音符。如果为1则为正常音符。
+            if (num == 1) {
+                newNote.classList.add('dontClick');
+                // 正常音符特有的类
+                newNote.classList.add('normalNote');
+                newNote.onclick = function () {
+                    let _this = this;
+                    let normalNotes = page.querySelectorAll('.normalNote');
+                    //当前元素必须为normalNote，且它的后一个normalNote必须没有类dontClick才能点击成功。
+                    // 当前元素为最后一个normalNote,能点击成功。
+                    [...normalNotes].forEach((v, i, arr) => {
+                        if (v === _this) {
+                            if (this === arr[arr.length - 1] || !arr[i + 1].classList.contains('dontClick')) {
+                                this.classList.add('click');
+                                if (this.classList.contains('dontClick')) {
+                                    score += 1;
+                                    speed += 20;
+                                    showScore(score);
+                                    audio.setAttribute('src', `./music/sound_${music[0][nowNote]}.mp3`);
+                                    audio.play();
+                                    ++nowNote;
+                                }
+                                this.classList.remove('dontClick');
+                            }
+                        }
+                    });
+                }
+            } else {
+                newNote.classList.add('errorNote');
+                newNote.onclick = function () {
+                    gameOver();
+                }
+            }
+            return newNote;
+        }
+
+        // 游戏结束
+        function gameOver() {
+            alert('Game Over!!');
+            clearInterval(interval01);
+            location.reload(true);
+        }
+
+        let page = document.querySelector('.page');
+
+        // 创建一个audio,并添加至body
+        let audio = document.createElement('audio');
+        document.querySelector('body').appendChild(audio);
+        // 当前播放的音符对应的数字
+        let nowNote = 0;
+
+        // 得分
+        let score = 0;
+        // 速度
+        let speed = 500;
+
+        // 显示得分
+        function showScore(score) {
+            document.querySelector('.score').innerHTML = score;
+        }
+
+        // 初始化，只有一个方格
+        let newNote = createNote();
+        page.appendChild(newNote);
+
+        // 让所有方块向下运动
+        let interval01 = setInterval(() => {
+            let notes = document.querySelectorAll('.page>.note');
+            notes.forEach((v) => {
+                // 当前遍历的元素的top
+                let vTop = parseFloat(getComputedStyle(v, null).top);
+                v.style.top = vTop + speed + 'px';
+                // 如果当前方块的top值大于page的height，则销毁。
+                if (vTop > parseFloat(getComputedStyle(page, null).height)) {
+                    page.removeChild(v);
+                }
+            });
+            // 第一个方格
+            let firstNote = page.firstElementChild;
+            // 如果第一个方格的top大于0，则创建新的的方格。新方格插入到第一个方格的前面。
+            // 第一个方格的top
+            let firstNoteTop = parseFloat(getComputedStyle(firstNote, null).top);
+            if (firstNoteTop > 0) {
+                let newNote = createNote();
+                page.insertBefore(newNote, firstNote);
+            }
+            // 如果最后一个方格触到底部，且还有类dontClick时游戏结束。点击确定则刷新页面。
+            // 最后一个方格
+            let lastNote = notes[notes.length - 1];
+            // 最后一个方格的bottom
+            let lastNoteBottom = parseFloat(getComputedStyle(lastNote, null).bottom);
+            if (lastNote.classList.contains('dontClick') && lastNoteBottom < 0) {
+                gameOver();
+                return;
+            }
+        }, 1000 / 120);
+    </script>
+</body>
+
+</html>

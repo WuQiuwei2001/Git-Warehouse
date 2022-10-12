@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+    <input type="text">
+    <ul></ul>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        // URL：发送请求的 URL字符串。
+        // data：可选的，发送给服务器的字符串或 key / value 键值对。
+        // callback：可选的，请求成功后执行的回调函数。data：响应数据 status：请求的状态（"success"、"notmodified"、"error"、"timeout"、"parsererror"）
+        // dataType：可选的，从服务器返回的数据类型。默认：智能猜测（可以是xml, json, script, 或 html）。
+        // $.get('http://localhost:3000/find', (data, status) => {
+        //     console.log(data);
+        //     console.log(status);
+        // });
+
+        // // $(selector).load(url,data,function(response,status,xhr))
+        // $('.box').load('http://localhost:3000/find', (response, status) => { });
+
+        // 防抖
+        function debounce(wait, callback) {
+            let timeout01;
+            return function (e) {
+                let _this = this;
+                let _arguments = arguments;
+                clearInterval(timeout01);
+                timeout01 = setTimeout(() => {
+                    callback.apply(_this, [e]);
+                }, wait);
+            };
+        }
+
+        // 封装一个ajax get请求
+        function getRequest(url) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open('get', url);
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                            resolve(xhr.responseText);
+                        } else {
+                            reject(this.status);
+                        }
+                    }
+                }
+            });
+        }
+
+        // 封装一个ajax post请求
+        function postRequest(url, data) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open('post', url);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(data));
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == XMLHttpRequest.DONE) {
+                        if ((this.status >= 200 && this.status < 300) || this.status == 304) {
+                            resolve(this.responseText);
+                        } else {
+                            reject(this.status);
+                        }
+                    }
+                }
+            });
+
+        }
+
+        // getRequest('http://localhost:3000/find').then((value) => {
+        //     console.log(JSON.parse(value));
+        //     return postRequest('http://localhost:3000/demo', { time: new Date() });
+        // }, (reason) => {
+        //     console.log(reason);
+        // }).then((value) => {
+        //     console.log(JSON.parse(value));
+        // }, (reason) => {
+        //     console.log(reason);
+        // });
+
+        let input = document.querySelector('input');
+        let ul = document.querySelector('ul');
+
+        input.oninput = debounce(500, function (e) {
+            let searchData = e.target.value;
+            ul.innerHTML = '';
+            getRequest('https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&wd=' + searchData).then((value) => {
+                let result = JSON.parse(value);
+                if (result.g) {
+                    let searchArry = result.g;
+                    searchArry.forEach((v) => {
+                        let liNode = document.createElement('li');
+                        liNode.innerHTML = v.q;
+                        ul.appendChild(liNode);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

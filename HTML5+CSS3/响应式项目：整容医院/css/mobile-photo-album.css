@@ -1,0 +1,51 @@
+.mobile-photo-album {
+    display: none;
+}
+
+.mobile-photo-album .item {
+    margin: 20px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.mobile-photo-album .item {
+    height: 338px;
+    width: 100%;
+    background-color: aqua;
+}
+
+.mobile-photo-album .item:nth-child(1) {
+    background-image: url('../img/gallery-1.jpg');
+}
+
+.mobile-photo-album .item:nth-child(2) {
+    background-image: url('../img/gallery-2.jpg');
+}
+
+.mobile-photo-album .item:nth-child(3) {
+    background-image: url('../img/gallery-3.jpg');
+}
+
+.mobile-photo-album .item:nth-child(4) {
+    height: 696px;
+    width: 100%;
+    background-color: aqua;
+    background-image: url('../img/gallery-4.jpg');
+}
+
+.mobile-photo-album .item:nth-child(5) {
+    background-image: url('../img/gallery-5.jpg');
+}
+
+.mobile-photo-album .item:nth-child(6) {
+    background-image: url('../img/gallery-6.jpg');
+}
+
+.mobile-photo-album .item:nth-child(7) {
+    background-image: url('../img/gallery-7.jpg');
+}
+
+.mobile-photo-album .item .content {
+    height: 100%;
+}

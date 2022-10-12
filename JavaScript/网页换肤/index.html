@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .box {
+      width: 300px;
+    }
+
+    /* 默认模式 */
+    .default {
+      background-color: lightblue;
+    }
+
+    /* 黑夜模式 */
+    .dark {
+      background-color: rgb(49, 49, 49);
+      color: #fff;
+    }
+
+    /* 护眼模式 */
+    .huyan {
+      background-color: rgb(133, 181, 71);
+    }
+
+    /* 按钮被点击的样式 */
+    .btnStyle {
+      background-color: orange;
+      color: aliceblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box default">
+    <h3>使觉不死尘，子以日。</h3>
+    <p>
+      以洪娇身范法生可司马颜，是才得是来大定哥惊他，于着快到订，
+      法五极月贤入小其王也，领嗣了爱皇被惜我母死和定攻仍，雷量事，
+      人马车览路韩畴帝非姑相，人战县俭司白其为来留样才我留韩，然
+      力力落拢生力月面十以他即请交李，别卡至极明言洪对将在们在化愿轻相，你非人选之死。
+    </p>
+  </div>
+  <button onclick="changeMode('default')">默认</button>
+  <button onclick="changeMode('huyan')">护眼</button>
+  <button onclick="changeMode('dark')">黑夜</button>
+
+  <script>
+    // expires /ɪk'spaɪəz/  n.到期；有效期
+    // 设置一个cookie
+    // 参数(key),键名
+    // 参数(value),键值
+    // d：多少天后过期 当该值为负数时，表示删除该cookie
+    function setCookie(key, velue, d) {
+      let now = new Date();
+      now.setDate(now.getDate() + d);
+      let v = typeof velue == 'string' ? '"' + velue + '"' : velue;
+      document.cookie = '"' + key + '"' + '=' + v + ';expires=' + now;
+    }
+
+    // 获取一个cookie
+    function getCookie(key) {
+      // 将字符串转换为对象
+      let cookieStr = document.cookie;
+      let objStr = "{" + cookieStr.replace(/\=/g, ':').replace(/\;/g, ',') + "}";
+      let cookieObj = JSON.parse(objStr);
+      return cookieObj[key];
+    }
+
+    let mode = getCookie('mode');
+
+    document.querySelector(".box").classList.add(mode);
+
+    let btns = document.querySelectorAll('button');
+
+    switch (true) {
+      case mode == 'default':
+        btns[0].classList.add('btnStyle'); break;
+      case mode == 'huyan':
+        btns[1].classList.add('btnStyle'); break;
+      case mode == 'dark':
+        btns[2].classList.add('btnStyle'); break;
+    }
+
+    function changeMode(mode) {
+      if (mode) {
+        document.querySelector(".box").className = 'box';
+        document.querySelector(".box").classList.add(mode);
+        setCookie('mode', mode, 7);
+      }
+      btns.forEach((v) => {
+        if (event.target === v) {
+          v.classList.add('btnStyle');
+        } else {
+          v.classList.remove('btnStyle');
+        }
+      });
+
+    }
+
+
+  </script>
+</body>
+
+</html>

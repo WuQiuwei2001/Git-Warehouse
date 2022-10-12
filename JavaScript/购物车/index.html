@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <title>购物车</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        /* 设计图的宽度为460px，屏幕的宽度为100vw 则1px=0.22vw */
+        .box {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(231, 234, 237);
+            position: relative;
+        }
+
+        .box>.head {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 7.5vh;
+            background-color: #fff;
+        }
+
+        .box>.head>div {
+            width: 10%;
+            text-align: center;
+        }
+
+        .box>.head>div:first-child {
+            border-bottom: 3px solid orange;
+        }
+
+        .box>.head>div>a {
+            color: black;
+        }
+
+        .goodList {
+            height: 85vh;
+            overflow-y: scroll;
+        }
+
+        .goodList>.content {}
+
+        .buttomBar {
+            height: 7.5vh;
+            background-color: #fff;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .buttomBar>.car {
+            width: 20%;
+            height: 7.5vh;
+            text-align: center;
+            background-color: orange;
+            line-height: 7.5vh;
+            font-size: 1.5em;
+        }
+
+        .buttomBar>.car a {
+            color: #fff;
+        }
+
+        .buttomBar>span {
+            font-weight: bold;
+        }
+
+        .buttomBar>.jiesuan {
+            width: 20%;
+            height: 100%;
+            line-height: 7.5vh;
+            text-align: center;
+            background-color: orange;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .good {
+            background-color: #fff;
+            margin: 5px 0;
+            display: flex;
+        }
+
+        .good>img {
+            width: calc(100 * 0.22vw);
+            display: block;
+            margin-right: 20px;
+        }
+
+        .good>.msg {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .good>.msg>.tilte {
+            font-weight: bold;
+        }
+
+        .good>.msg>.price {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .good>.btns {
+            display: flex;
+            align-items: center;
+        }
+
+        .good>.btns>a {
+            background-color: orange;
+            color: #fff;
+            height: calc(20 * 0.22vw);
+            width: calc(20 * 0.22vw);
+            text-align: center;
+            line-height: calc(20 * 0.22vw);
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: calc(20 * 0.22vw);
+            cursor: pointer;
+        }
+
+        .good>.btns>.num {
+            margin: 0 10px;
+        }
+
+        .box>.carPage {
+            height: 100vh;
+            width: 100%;
+            background-color: rgba(127, 127, 127, 0.581);
+            position: absolute;
+            top: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carPage>.content {
+            width: 70%;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .carPage>.content>.topBar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .carPage>.content>.topBar>a {
+            background-color: black;
+            color: #fff;
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        .carPage>.content>.classList {
+            height: calc(250 * 0.22vw);
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <section class="head">
+            <div class="diancai">
+                <a href="#">点菜</a>
+            </div>
+            <div class="diancai">
+                <a href="#">评价</a>
+            </div>
+            <div class="diancai">
+                <a href="#">商家</a>
+            </div>
+        </section>
+        <section class="goodList">
+            <div class="content"></div>
+        </section>
+        <section class="buttomBar">
+            <div class="car">
+                <a href="#">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </a>
+            </div>
+            <span class="total">共计￥0元</span>
+            <div class="jiesuan">
+                结算
+            </div>
+        </section>
+        <section class="carPage">
+            <div class="content">
+                <div class="topBar">
+                    <span>购物车</span>
+                    <a href="#">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="classList"></div>
+            </div>
+        </section>
+    </div>
+    <script>
+        let goodList = [
+            {
+                img: './img/pic2.png',
+                goodsName: '水果',
+                goodPrics: 4.5,
+                goodNum: 0
+            },
+            {
+                img: './img/pic3.png',
+                goodsName: '蔬菜',
+                goodPrics: 5.5,
+                goodNum: 0
+            },
+            {
+                img: './img/pic4.png',
+                goodsName: '麻辣小龙虾',
+                goodPrics: 3.5,
+                goodNum: 0
+            }
+        ];
+
+        let content = document.querySelector('.goodList>.content');
+        let classList = document.querySelector('.carPage>.content>.classList');
+        for (let index = 0; index <= goodList.length - 1; index++) {
+            let good = document.createElement('div');
+            good.classList.add('good');
+            let img = goodList[index].img;
+            let goodsName = goodList[index].goodsName;
+            let goodPrics = goodList[index].goodPrics;
+            let goodNum = goodList[index].goodNum;
+            good.innerHTML = `<img src="${img}">
+            <div class="msg">
+                <p class="tilte">${goodsName}</p>
+                <p class="monthlySales">月销XXX</p>
+                <p class="price">${goodPrics}￥</p>
+                </div>
+                <div class="btns">
+                    <a class="jian">-</a>
+                    <div class="num">${goodNum}</div>
+                    <a class="jia">+</a>
+                    </div>`;
+
+            // 克隆节点
+            let goodClone = good.cloneNode(true);
+
+            good.querySelector('.good .jia').onclick = function () {
+                ++goodList[index].goodNum;
+                good.querySelector('.good .num').innerHTML = `${goodList[index].goodNum}`;
+                goodClone.querySelector('.good .num').innerHTML = `${goodList[index].goodNum}`;
+                showTotalPrice();
+            }
+            good.querySelector('.jian').onclick = function () {
+                if (goodList[index].goodNum > 0) {
+                    --goodList[index].goodNum;
+                    good.querySelector('.num').innerHTML = `${goodList[index].goodNum}`;
+                    goodClone.querySelector('.num').innerHTML = `${goodList[index].goodNum}`;
+                    showTotalPrice();
+                }
+            }
+            content.appendChild(good);
+
+            goodClone.querySelector('.good .jia').onclick = function () {
+                ++goodList[index].goodNum;
+                good.querySelector('.good .num').innerHTML = `${goodList[index].goodNum}`;
+                goodClone.querySelector('.good .num').innerHTML = `${goodList[index].goodNum}`;
+                showTotalPrice();
+            }
+            goodClone.querySelector('.jian').onclick = function () {
+                if (goodList[index].goodNum > 0) {
+                    --goodList[index].goodNum;
+                    good.querySelector('.num').innerHTML = `${goodList[index].goodNum}`;
+                    goodClone.querySelector('.num').innerHTML = `${goodList[index].goodNum}`;
+                    showTotalPrice();
+                }
+            }
+            classList.appendChild(goodClone);
+        }
+        // 计算总价格
+        let total = document.querySelector('.buttomBar>.total');
+        function showTotalPrice() {
+            let totalPrice = 0;
+            goodList.forEach((v, i) => {
+                totalPrice += v.goodPrics * v.goodNum;
+            });
+            total.innerHTML = `共计${totalPrice}元`;
+            return totalPrice;
+        }
+
+        // 结算后，刷新页面
+        document.querySelector('.jiesuan').onclick = function () {
+            alert('共计' + showTotalPrice() + '元。');
+            location.reload(true);
+        }
+
+        // 隐藏购物车页面
+        document.querySelector('.carPage a').onclick = function () {
+            document.querySelector('.carPage').style.display = 'none';
+        }
+        // 显示购物车页面
+        document.querySelector('.buttomBar .car').onclick = function () {
+            document.querySelector('.carPage').style.display = 'flex';
+        }
+    </script>
+</body>
+
+</html>

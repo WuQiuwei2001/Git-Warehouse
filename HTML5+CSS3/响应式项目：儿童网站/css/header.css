@@ -1,0 +1,182 @@
+header {
+  background-color: rgba(128, 128, 128, 0.559);
+  padding: 50px 0;
+  position: relative;
+  overflow: hidden;
+}
+header > .center {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+header > .center > .top > .up {
+  margin-bottom: 40px;
+}
+header > .center > .top > .up::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+header > .center > .top > .up > div {
+  float: left;
+}
+header > .center > .top > .up > .left {
+  color: #fff;
+  font-size: 36px;
+  width: 50%;
+}
+header > .center > .top > .up > .left .red {
+  color: red;
+  font-size: 30px;
+}
+header > .center > .top > .up > .right {
+  width: 45%;
+  color: #fff;
+  position: relative;
+}
+header > .center > .top > .up > .right::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .up > .right > div {
+  width: 45%;
+  float: left;
+  font-size: 14px;
+}
+header > .center > .top > .up > .right > .addr::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .up > .right > .addr > .left_icon,
+header > .center > .top > .up > .right > .addr > .span {
+  float: left;
+}
+header > .center > .top > .up > .right > .addr > .left_icon {
+  width: 10%;
+  font-size: 30px;
+  text-align: center;
+  margin-right: 10px;
+  color: orange;
+}
+header > .center > .top > .up > .right > .addr > span {
+  width: 80%;
+  font-weight: bold;
+}
+header > .center > .top > .up > .right > .clock {
+  position: absolute;
+  right: 0;
+}
+header > .center > .top > .up > .right > .clock::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .up > .right > .clock > .left_icon,
+header > .center > .top > .up > .right > .clock > .span {
+  float: left;
+}
+header > .center > .top > .up > .right > .clock > .left_icon {
+  color: red;
+  width: 10%;
+  font-size: 30px;
+  text-align: center;
+  margin-right: 10px;
+}
+header > .center > .top > .up > .right > .clock > span {
+  width: 80%;
+  font-weight: bold;
+}
+header > .center > .top > .down {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 50px;
+}
+header > .center > .top > .down::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .down > div {
+  float: left;
+}
+header > .center > .top > .down > .left > ul::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .down > .left > ul li {
+  float: left;
+  margin-right: 20px;
+}
+header > .center > .top > .down > .left > ul li > a {
+  color: black;
+}
+header > .center > .top > .down > .left > ul li:first-child a {
+  color: red;
+}
+header > .center > .top > .down > .left > ul li:hover > a {
+  color: red;
+}
+header > .center > .top > .down > .right {
+  float: right;
+}
+header > .center > .top > .down > .right::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+header > .center > .top > .down > .right > a {
+  display: block;
+  font-size: 20px;
+  float: left;
+}
+header > .center > .top > .down > .right > a:first-child {
+  color: aqua;
+}
+header > .center > .top > .down > .right > a:nth-child(2) {
+  color: green;
+  margin: 0 20px;
+}
+header > .center > .top > .down > .right > a:nth-child(3) {
+  color: orange;
+}
+header > .center > .center {
+  width: 30%;
+  margin: 200px 0 100px 0;
+}
+header > .center > .center > .welocome {
+  color: red;
+}
+header > .center > .center > .bold {
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  margin: 10px 0;
+}
+header > .center > .center > p:last-child {
+  color: #fff;
+}
+header > .center > .buttom > button {
+  text-transform: uppercase;
+  font-size: 14px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px 0 20px 0;
+  cursor: pointer;
+}
+header > .center > .buttom > button:hover {
+  background-color: #cb0606;
+}
+header > img {
+  width: 40%;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/*# sourceMappingURL=./header.css.map */

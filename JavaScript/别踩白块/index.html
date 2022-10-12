@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>就踩白块</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            position: relative;
+        }
+
+        .box>p {
+            text-align: center;
+            color: orange;
+            font-size: 2em;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .box>.whiteSpaces {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box>.whiteSpaces>.errorArea {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .box>.whiteSpaces>.whiteSpace {
+            width: 25vw;
+            /* 1*25vw 2*25vw 3*25vw 4*25vw*/
+            background-color: white;
+            position: absolute;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>0</p>
+        <!-- 白块盒子 -->
+        <section class="whiteSpaces">
+            <section class="errorArea"></section>
+        </section>
+    </div>
+    <script>
+        // 获取所有的whiteSpace
+        let allWhiteSpace = document.querySelectorAll('.box>.whiteSpaces>.whiteSpace');
+        let whiteSpaces = document.querySelector('.box>.whiteSpaces');
+        let p = document.querySelector('.box>p');
+        // 分数
+        var score = 0;
+
+        //速度
+        let speed = 1;
+        // 创建一个新的白块
+        function createNewSpace(isInit) {
+            let newSpace = document.createElement('div');
+            newSpace.classList.add('whiteSpace');
+            newSpace.style.left = 25 * Math.floor(Math.random() * 4) + 'vw';
+            if (!isInit) {
+                // [1-4]
+                let num = Math.ceil(Math.random() * 4);
+                newSpace.style.top = '-' + 25 * num + 'vw';
+                newSpace.style.height = 25 * num + 'vw';
+                // left[0*25vw 1*25vw 2*25vw 3*25vw]
+            } else {
+                let num = Math.ceil(Math.random() * 3);
+                newSpace.style.height = 25 * num + 'vw';
+                newSpace.style.top = 0 + 'vw';
+            }
+            newSpace.onclick = function () {
+                // 获取当前元素的高度
+                newSpace.style.height = parseFloat(newSpace.style.height) - 25 + 'vw';
+                ++score;
+                p.innerHTML = score;
+                if (score % 10 == 0) {
+                    speed += 0.5;
+                }
+
+            }
+            return newSpace;
+        }
+
+        // 点击黑色区域，则结束游戏。
+        let errorArea = document.querySelector('.box>.whiteSpaces>.errorArea');
+        errorArea.onclick = function () {
+            alert('Game Over!!');
+            clearInterval(inter01);
+            // 刷新页面，并清空缓存
+            location.reload(true);
+        }
+
+        // 初始化，生成一个白块
+        let initSpace = createNewSpace(true);
+        whiteSpaces.appendChild(initSpace);
+
+        // 定义定时器
+        let inter01 = setInterval(() => {
+            let allWhiteSpace = document.querySelectorAll('.box>.whiteSpaces>.whiteSpace');
+            allWhiteSpace.forEach((v, i) => {
+                // 获取当前遍历的元素的top
+                let nowTop = parseFloat(getComputedStyle(v, null).top);
+                v.style.top = nowTop + speed + 'px';
+                // 如果遍历到的元素高度为0
+                let vHeight = parseFloat(v.style.height);
+                if (vHeight == 0) {
+                    whiteSpaces.removeChild(v);
+                }
+            });
+
+            if (allWhiteSpace.length != 0) {
+                // 第一个whiteSpace
+                let firstWhiteSpace = allWhiteSpace[0];
+                // 第一个whiteSpace的top，当top>0时，在第一个whiteSpace的前面插入新的whiteSpace
+                let firstWhiteSpaceTop = parseFloat(getComputedStyle(firstWhiteSpace, null).top);
+                if (firstWhiteSpaceTop > 0) {
+                    let newSpace = createNewSpace();
+                    whiteSpaces.insertBefore(newSpace, firstWhiteSpace);
+                }
+                // 如果最后一个whiteSpace的buttom <0, 则游戏结束
+                //最后一个whiteSpace
+                let lastWhiteSpace = allWhiteSpace[allWhiteSpace.length - 1];
+                let lastWhiteSpaceButtom = parseFloat(getComputedStyle(lastWhiteSpace, null).bottom);
+                // if (lastWhiteSpaceButtom < 0) {
+                //     alert('Game Over!!');
+                //     clearInterval(inter01);
+                //     // 刷新页面，并清空缓存
+                //     location.reload(true);
+                // }
+            } else {
+                // 初始化，生成一个白块
+                let initSpace = createNewSpace(true);
+                whiteSpaces.appendChild(initSpace);
+            }
+
+        }, 1000 / 60);
+    </script>
+</body>
+
+</html>

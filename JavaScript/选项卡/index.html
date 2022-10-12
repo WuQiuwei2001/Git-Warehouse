@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			#box {
+				width: 40%;
+				margin: 0 auto;
+				border: 1px solid black;
+			}
+
+			#box>.btns {
+				width: 100%;
+				display: flex;
+			}
+
+			#box>.btns>li {
+				width: 25%;
+				height: 30px;
+				background-color: #FFA500;
+				box-sizing: border-box;
+				border: 2px solid white;
+				text-align: center;
+				line-height: 30px;
+				color: #FFFFFF;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			#box>#content>.item {
+				height: 300px;
+				text-align: center;
+				line-height: 300px;
+				font-weight: bold;
+				box-sizing: border-box;
+				border: 2px solid #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul class="btns">
+				<li>选项1</li>
+				<li>选项2</li>
+				<li>选项3</li>
+				<li>选项4</li>
+			</ul>
+			<div id="content">
+				<div class="item">
+					内容1
+				</div>
+				<div class="item">
+					内容2
+				</div>
+				<div class="item">
+					内容3
+				</div>
+				<div class="item">
+					内容4
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			let allLi = document.querySelectorAll('#box>.btns>li');
+			let allItem = document.querySelectorAll('#box>#content>.item');
+
+			// 显示第n块内容
+			function showItem(index) {
+				for (let i = 0; i <= allLi.length - 1; i++) {
+					if (i == index) {
+						allLi[i].style.backgroundColor = "black";
+						allItem[i].style.display = 'block';
+					} else {
+						allLi[i].style.backgroundColor = "orange";
+						allItem[i].style.display = 'none';
+					}
+				}
+				return index;
+			}
+
+			// 默认显示第一块内容
+			let index = showItem(0);
+
+			for (let i = 0; i <= allLi.length - 1; i++) {
+				allLi[i].num = i;
+				allLi[i].onclick = function() {
+					showItem(this.num);
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>记忆卡牌</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.desk {
+				width: 500px;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				align-content: center;
+				margin: 0 auto;
+			}
+
+			.desk>li {
+				width: 23%;
+				height: 150px;
+				background-color: #007AFF;
+				margin: 5px 0;
+				border-radius: 5px;
+				text-align: center;
+				line-height: 150px;
+				font-size: 2em;
+				font-weight: bold;
+				color: white;
+				cursor: pointer;
+			}
+
+			.desk>li>span {
+				transition: all 0.5s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="desk"></ul>
+		<script type="text/javascript">
+			let desk = document.querySelector('.desk');
+			// 生成16张牌
+			for (let i = 1; i <= 16; i++) {
+				desk.appendChild(document.createElement('li'));
+			}
+
+			let nums = [1, 2, 3, 4, 5, 6, 7, 8];
+			nums.sort(() => {
+				return Math.random() - 0.5;
+			});
+
+			// 数组，保存翻开的牌。当数组长度为2时，清空数组的元素。
+			let cards = [];
+
+
+			//   li(0) -   li(7)
+			// nums[0] - nums[7]
+
+			//   li(8) -   li(9)       -  li(10)    -li(11)    
+			//   nums[0] - nums[1]     -nums[2]     -num[3]
+			//    8-8       9-8           10-8        11-8
+			desk.querySelectorAll('li').forEach((v, i) => {
+				if (i > 7) {
+					v.innerHTML = '<span>' + nums[i - 8] + '</span>';
+				} else {
+					v.innerHTML = '<span>' + nums[i] + '</span>';
+				}
+				// 默认情况下，卡牌上的数字隐藏
+				v.querySelector('span').style.opacity = '0';
+
+				// 为每一张卡片添加单击事件
+				v.onclick = function() {
+					// 当nums中没有点击的元素才添加
+					if (!cards.includes(this.querySelector('span')) && cards.length < 2) {
+						cards.push(this.querySelector('span'));
+						this.querySelector('span').style.opacity = '1';
+					}
+
+					if (cards.length == 2) {
+						if (cards[0].innerHTML != cards[1].innerHTML) {
+							setTimeout(() => {
+								cards[0].style.opacity = '0';
+								cards[1].style.opacity = '0';
+								// 清空数组内的元素。
+								cards.splice(0, cards.length);
+							}, 500);
+						} else {
+							cards[0].style.opacity = '1';
+							cards[1].style.opacity = '1';
+							cards.splice(0, cards.length);
+						}
+					}
+
+					// 如果所有卡片都被翻开,则提示，并刷新页面
+					let isEvery = [...desk.querySelectorAll('span')].every((v) => {
+						return v.style.opacity == '1';
+					});
+					if (isEvery) {
+						setTimeout(() => {
+							alert('You Win!');
+							location.reload(true);
+						}, 500)
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

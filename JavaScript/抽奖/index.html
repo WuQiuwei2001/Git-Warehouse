@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>抽奖</title>
+		<style type="text/css">
+			.title {
+				width: 500px;
+				height: 50px;
+				box-shadow: 0 0 5px #a6a6a6;
+				border-radius: 10px;
+				margin: 0 auto;
+				text-align: center;
+				line-height: 50px;
+				font-weight: bold;
+			}
+
+			#box {
+				width: 500px;
+				margin: 0 auto;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+			}
+
+			#box>div,
+			#box>.start {
+				width: 30%;
+				background-color: #2578ed;
+				margin: 10px 0;
+				text-align: center;
+				padding: 60px 0;
+				font-size: 20px;
+				color: white;
+				font-weight: bold;
+				border-radius: 10px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			#box>.start {
+				display: block;
+				background-color: black;
+				cursor: pointer;
+			}
+
+			.beforeBack::after {
+				content: "";
+				background-color: rgba(0, 0, 0, 0.549);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p class="title"></p>
+		<div id="box">
+			<div class="gift beforeBack">手机</div>
+			<div class="gift">平板</div>
+			<div class="gift">电磁炉</div>
+			<div class="gift">电视</div>
+			<button class="start">开始</button>
+			<div class="gift">洗衣机</div>
+			<div class="gift">电脑</div>
+			<div class="gift">冰箱</div>
+			<div class="gift">衣柜</div>
+		</div>
+
+		<script type="text/javascript">
+			let divAll = document.querySelectorAll('.gift');
+			let p = document.querySelector('.title');
+			let start = document.querySelector('.start');
+
+			// 手机 平板 电磁炉 洗衣机 衣柜 冰箱 电脑 电视
+			let giftAll = [divAll[0], divAll[1], divAll[2], divAll[4], divAll[7], divAll[6], divAll[5], divAll[3]];
+
+			let giftIndex = 0;
+
+			// 随机数 [0-7] 代表商品
+			let giftNum;
+			let I01;
+			let T01;
+			start.onclick = function() {
+				clearInterval(I01);
+				clearTimeout(T01);
+				giftNum = Math.floor(Math.random() * 8);
+
+				I01 = setInterval(() => {
+					p.innerHTML = '';
+					giftAll.forEach((v, i) => {
+						if (i == giftIndex) {
+							v.classList.add('beforeBack');
+						} else {
+							v.classList.remove('beforeBack');
+						}
+					});
+					giftIndex = giftIndex >= 7 ? 0 : ++giftIndex;
+					start.setAttribute('disabled', true);
+				}, 50);
+
+				T01 = setTimeout(() => {
+					let I02 = setInterval(() => {
+						if (giftIndex == giftNum) {
+							clearInterval(I01);
+							p.innerHTML = '恭喜你，你抽中了' + document.querySelector('.beforeBack').innerHTML;
+							start.removeAttribute('disabled');
+							clearInterval(I02);
+						}
+					}, 50);
+				}, 2000);
+			};
+
+			// let I01 = setInterval(() => {
+			// 	p.innerHTML = '';
+			// 	giftAll.forEach((v, i) => {
+			// 		if (i == giftIndex) {
+			// 			v.classList.add('beforeBack');
+			// 		} else {
+			// 			v.classList.remove('beforeBack');
+			// 		}
+			// 	});
+			// 	giftIndex = giftIndex >= 7 ? 0 : ++giftIndex;
+			// }, 100);
+		</script>
+	</body>
+
+</html>

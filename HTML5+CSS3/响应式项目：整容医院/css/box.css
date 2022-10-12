@@ -1,0 +1,38 @@
+.box {
+    padding: 100px 0 50px 0;
+}
+
+.box h1 p:nth-child(1) {
+    font-weight: 100;
+    color: gray;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.box p {
+    text-align: center;
+}
+
+
+.box .items {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.box .items .item {
+    width: 20%;
+    text-align: center;
+    margin: 10px;
+}
+
+.box .items .item p:nth-child(2) {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.box .items .item p:nth-child(3) {
+    font-weight: 100;
+}

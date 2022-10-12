@@ -1,0 +1,135 @@
+footer {
+  background-image: url('../img/footer.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
+  padding-top: 100px;
+}
+footer::before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+footer > .content {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+footer > .content > .top {
+  border-bottom: 2px solid #fff;
+  position: relative;
+  padding-bottom: 100px;
+}
+footer > .content > .top::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+footer > .content > .top > div {
+  float: left;
+}
+footer > .content > .top > div:last-child {
+  position: absolute;
+  right: 0;
+}
+footer > .content > .top > div:not(footer > .content > .top > div:last-child) {
+  margin-right: 60px;
+}
+footer > .content > .top > .left {
+  width: 30%;
+  color: #fff;
+}
+footer > .content > .top > .left > .title > span {
+  font-weight: 100;
+}
+footer > .content > .top > .left > .article {
+  font-size: 15px;
+  margin: 20px 0;
+}
+footer > .content > .top > .left a {
+  color: #fff;
+  font-size: 20px;
+  transition: all 1s ease;
+  margin-right: 10px;
+}
+footer > .content > .top > .left a:hover {
+  color: #f54747;
+}
+footer > .content > .top > .center_1 {
+  width: 15%;
+}
+footer > .content > .top > .center_1 > .title {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+footer > .content > .top > .center_1 > .links > li {
+  margin: 5px 0;
+}
+footer > .content > .top > .center_1 a {
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.5s ease;
+}
+footer > .content > .top > .center_1 a:hover {
+  color: #f54747;
+}
+footer > .content > .top > .center_2 {
+  width: 15%;
+  font-size: 14px;
+}
+footer > .content > .top > .center_2 > .title {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+footer > .content > .top > .center_2 > .links {
+  color: #fff;
+}
+footer > .content > .top > .center_2 > .links > li {
+  margin-bottom: 10px;
+}
+footer > .content > .top > .center_2 > .links a {
+  color: #fff;
+  transition: all 0.5s ease;
+}
+footer > .content > .top > .center_2 > .links a:hover {
+  color: #f54747;
+}
+footer > .content > .top > .right {
+  width: 25%;
+  color: #fff;
+  font-size: 14px;
+}
+footer > .content > .top > .right > p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+footer > .content > .top > .right > ul > li > .time {
+  float: right;
+}
+footer > .content .buttom {
+  padding: 30px 0 60px 0;
+}
+footer > .content .buttom > p {
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+}
+footer > .content .buttom > p > a {
+  color: #fff;
+}
+footer > .content .buttom > p > a:hover {
+  color: #f54747;
+}
+/*# sourceMappingURL=./footer.css.map */

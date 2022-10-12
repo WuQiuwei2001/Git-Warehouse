@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <title>bilibili漫画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .box>.Tobbar {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .box>.Tobbar>div {
+            margin: 10px 0;
+        }
+
+        .box>.Tobbar span {
+            color: gray;
+        }
+
+        .box>.Tobbar .click {
+            color: aqua;
+        }
+
+        .box>.Tobbar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .box>.content {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .box>.content>.item {
+            width: 15%;
+            margin: 10px 0;
+        }
+
+        .box>.content>.item>.title {
+            font-size: 0.5em;
+        }
+
+        .box>.content>.item>img {
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <section class="Tobbar">
+        </section>
+        <div class="content">
+        </div>
+    </div>
+    <script>
+        // 封装一个AJAX get请求
+        function getRequest(path) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open('get', path);
+                xhr.send();
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == XMLHttpRequest.DONE) {
+                        if (this.status >= 200 && this.status < 300 || this.status == 304) {
+                            resolve(JSON.parse(this.responseText));
+                        } else {
+                            reject({ msg: '请求失败！' });
+                        }
+                    }
+                }
+            });
+        }
+
+        // 防抖
+        function debounce(wait, callback) {
+            let timeout01;
+
+            return function (e) {
+                clearTimeout(timeout01);
+                let _this = this;
+                timeout01 = setTimeout(function () {
+                    callback.apply(_this, [e]);
+                }, wait);
+            }
+        }
+
+        let content = document.querySelector('.box>.content');
+        let box = document.querySelector('.box');
+
+        let domObj = [
+            {
+                divClass: 'styleId',
+                title: '题材',
+                allA: [
+                    { title: '全部', urlParam: '-1' },
+                    { title: '热血', urlParam: '999' },
+                    { title: '古风', urlParam: '997' },
+                    { title: '玄幻', urlParam: '1016' },
+                    { title: '奇幻', urlParam: '998' },
+                    { title: '悬疑', urlParam: '1023' },
+                    { title: '都市', urlParam: '1002' },
+                    { title: '历史', urlParam: '1096' },
+                    { title: '武侠仙侠', urlParam: '1092' },
+                    { title: '游戏竞技', urlParam: '1088' },
+                    { title: '悬疑灵异', urlParam: '1081' },
+                    { title: '架空', urlParam: '1063' },
+                    { title: '青春', urlParam: '1060' },
+                    { title: '西幻', urlParam: '1054' },
+                    { title: '现代', urlParam: '1048' },
+                    { title: '正能量', urlParam: '1028' },
+                    { title: '科幻', urlParam: '1015' },
+                ]
+            },
+            {
+                divClass: 'areaId',
+                title: '地区',
+                allA: [
+                    { title: '全部', urlParam: '-1' },
+                    { title: '大陆', urlParam: '1' },
+                    { title: '日本', urlParam: '2' },
+                    { title: '韩国', urlParam: '6' },
+                    { title: '其他', urlParam: '5' }
+                ]
+            },
+            {
+                divClass: 'isFinish',
+                title: '进度',
+                allA: [
+                    { title: '全部', urlParam: '-1' },
+                    { title: '连载', urlParam: '0' },
+                    { title: '完结', urlParam: '1' },
+                ]
+            },
+            {
+                divClass: 'isFree',
+                title: '收费',
+                allA: [
+                    { title: '全部', urlParam: '-1' },
+                    { title: '免费', urlParam: '1' },
+                    { title: '付费', urlParam: '2' },
+                    { title: '等就免费', urlParam: '3' }
+                ]
+            },
+            {
+                divClass: 'order',
+                title: '排序',
+                allA: [
+                    { title: '人气推荐', urlParam: '0' },
+                    { title: '更新时间', urlParam: '1' },
+                    { title: '追漫人数', urlParam: '2' },
+                    { title: '上架时间', urlParam: '3' }
+                ]
+            }
+        ];
+        let styleId = domObj[0].allA[0].urlParam;
+        let areaId = domObj[1].allA[0].urlParam;
+        let isFinish = domObj[2].allA[0].urlParam
+        let isFree = domObj[3].allA[0].urlParam;
+        let order = domObj[4].allA[0].urlParam;
+        let pageNum = 1;
+
+        let url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+
+        let Tobbar = document.querySelector('.box>.Tobbar');
+        domObj.forEach((v, i, a) => {
+            Tobbar.innerHTML += `<div class="${v.divClass}">
+                <span>${v.title}</span>
+                </div>`;
+
+            let div = document.querySelector(`.${v.divClass}`);
+            v.allA.forEach((v, i, a) => {
+                let aLink = document.createElement('a');
+                aLink.href = '#';
+                aLink.innerHTML = `${v.title}`;
+                div.appendChild(aLink);
+                if (i == 0) {
+                    aLink.classList.add('click');
+                }
+            });
+        });
+
+        let allDiv = document.querySelectorAll('.Tobbar>div');
+        allDiv.forEach((v, i, a) => {
+            v.querySelectorAll('a').forEach((_v, _i, _a) => {
+                _v.onclick = function () {
+                    let _this = this;
+                    let allA = this.parentNode.querySelectorAll('a').forEach((v1, i1, a1) => {
+                        if (v1 == _this) {
+                            v1.classList.add('click');
+                        } else {
+                            v1.classList.remove('click');
+                        }
+                    });
+                    switch (true) {
+                        case this.parentNode.className == 'styleId':
+                            styleId = domObj[0].allA[_i].urlParam;
+                            pageNum = 1;
+                            url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+                            content.innerHTML = '';
+                            showPage(url);
+                            break;
+                        case this.parentNode.className == 'areaId':
+                            areaId = domObj[1].allA[_i].urlParam;
+                            pageNum = 1;
+                            url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+                            content.innerHTML = '';
+                            showPage(url);
+                            break;
+                        case this.parentNode.className == 'isFinish':
+                            isFinish = domObj[2].allA[_i].urlParam;
+                            pageNum = 1;
+                            url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+                            content.innerHTML = '';
+                            showPage(url);
+                            break;
+                        case this.parentNode.className == 'isFree':
+                            isFree = domObj[3].allA[_i].urlParam;
+                            pageNum = 1;
+                            url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+                            content.innerHTML = '';
+                            showPage(url);
+                            break;
+                        case this.parentNode.className == 'order':
+                            order = domObj[4].allA[_i].urlParam;
+                            pageNum = 1;
+                            url = `https://apis.netstart.cn/bcomic/ClassPage?styleId=${styleId}&areaId=${areaId}&isFinish=${isFinish}&order=${order}&pageNum=${pageNum}&isFree=${isFree}`;
+                            content.innerHTML = '';
+                            showPage(url);
+                            break;
+                    }
+                }
+            });
+        });
+
+        // 向页面渲染数据
+        function showPage(url) {
+            getRequest(url)
+                .then((value) => {
+                    let data = value.data;
+                    data.forEach((v, i, a) => {
+                        if (v.is_finish == 1) {
+                            content.innerHTML += `<div class="item">
+            <img src="${v.vertical_cover}">
+            <section class="title">
+                <p>${v.title}</p>
+                <p>[完结] 共 ${v.total} 话</p>
+            </section>
+        </div>`;
+                        } else {
+                            // 如果未完结
+                            content.innerHTML += `<div class="item">
+            <img src="${v.vertical_cover}">
+            <section class="title">
+                <p>${v.title}</p>
+                <p>更新至 ${v.last_short_title} 话</p>
+            </section>
+        </div>`;
+                        }
+                    });
+                }, (reason) => {
+                    console.log(reason);
+                });
+        }
+
+        showPage(url);
+
+        // 当滚动条触底时载入数据
+        box.onscroll = debounce(500, function () {
+            if (parseInt(this.scrollHeight - this.scrollTop) == this.clientHeight) {
+                ++pageNum;
+                showPage(url);
+            }
+        });
+    </script>
+</body>
+
+</html>

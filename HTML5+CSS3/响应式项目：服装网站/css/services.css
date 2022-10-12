@@ -1,0 +1,101 @@
+.services {
+  padding: 80px 0;
+}
+.services > p {
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+}
+.services > p > span {
+  font-weight: 300;
+}
+.services > .center {
+  width: 80%;
+  margin: 60px auto;
+}
+.services > .center::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.services > .center .card {
+  float: left;
+  width: 23%;
+  height: 350px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+.services > .center .card:nth-child(1) {
+  background-image: url('../img/s1.jpg');
+}
+.services > .center .card:nth-child(2) {
+  background-image: url('../img/s2.jpg');
+}
+.services > .center .card:nth-child(3) {
+  background-image: url('../img/s3.jpg');
+}
+.services > .center .card:last-child {
+  float: right;
+  background-image: url('../img/s4.jpg');
+}
+.services > .center .card:nth-child(2),
+.services > .center .card:nth-child(3) {
+  margin-left: 32px;
+}
+.services > .center .card:hover .cover {
+  transform: scale(1);
+}
+.services > .center .card:hover .icon {
+  opacity: 0;
+}
+.services > .center .card > .icon {
+  width: 30px;
+  height: 30px;
+  background-color: #f54748;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  transition: all 1s ease;
+}
+.services > .center .card > .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(245, 71, 71, 0.532);
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  transform: scale(0);
+  transition: all 1s ease;
+}
+.services > .center .card > .cover > .content {
+  padding: 0 40px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.services > .center .card > .cover > .content > p:nth-child(1) {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.services > .center .card > .cover > .content > p:nth-child(2) {
+  line-height: 25px;
+}
+.services > .buttom {
+  text-align: center;
+}
+.services > .buttom button {
+  border: none;
+  color: #fff;
+  background-color: #f54748;
+  padding: 20px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=./services.css.map */
