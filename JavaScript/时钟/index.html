@@ -1,133 +1,136 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<style type="text/css">
-			* {
-				padding: 0;
-				margin: 0;
-			}
 
-			#clock {
-				width: 500px;
-				height: 500px;
-				background-color: #FFA500;
-				position: relative;
-				border-radius: 50%;
-				overflow: hidden;
-				margin: 0 auto;
-				border: 5px solid black;
-			}
+<head>
+	<meta charset="utf-8">
+	<title>时钟</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
 
-			#clock>div {
-				position: absolute;
-				top: 0;
+		#clock {
+			width: 500px;
+			height: 500px;
+			background-color: #FFA500;
+			position: relative;
+			border-radius: 50%;
+			overflow: hidden;
+			margin: 0 auto;
+			border: 5px solid black;
+		}
 
-			}
+		#clock>div {
+			position: absolute;
+			top: 0;
 
-			.needleBig {
-				width: 6px;
-				height: 20px;
-				background-color: #000000;
-				transform-origin: 50% 1250%;
-				transform: rotate(0deg);
-				left: calc(50% - 3px);
-			}
+		}
 
-			.needleSmall {
-				width: 3px;
-				height: 10px;
-				background-color: #000000;
-				transform-origin: 50% 2500%;
-				transform: rotate(0deg);
-				left: calc(50% - 1.5px);
-			}
+		.needleBig {
+			width: 6px;
+			height: 20px;
+			background-color: #000000;
+			transform-origin: 50% 1250%;
+			transform: rotate(0deg);
+			left: calc(50% - 3px);
+		}
 
-			#clock>.dot {
-				height: 5px;
-				width: 5px;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background-color: #000000;
-				border-radius: 50%;
-			}
+		.needleSmall {
+			width: 3px;
+			height: 10px;
+			background-color: #000000;
+			transform-origin: 50% 2500%;
+			transform: rotate(0deg);
+			left: calc(50% - 1.5px);
+		}
 
-			#zhen {
-				position: relative;
-				width: 100%;
-				height: 100%;
-			}
+		#clock>.dot {
+			height: 5px;
+			width: 5px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #000000;
+			border-radius: 50%;
+		}
 
-			#zhen>div {
-				width: 5px;
-				position: absolute;
-				top: 50%;
-				left: calc(50% - 2.5px);
-				border-radius: 10px;
-			}
+		#zhen {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
 
-			#zhen>#s {
-				height: 200px;
-				background-color: #FFFFFF;
-				transform-origin: 50% 0%;
-				transform: rotate(180deg);
-			}
+		#zhen>div {
+			width: 5px;
+			position: absolute;
+			top: 50%;
+			left: calc(50% - 2.5px);
+			border-radius: 10px;
+		}
 
-			#zhen>#m {
-				height: 170px;
-				background-color: black;
-				transform-origin: 50% 0%;
-				transform: rotate(180deg);
-			}
+		#zhen>#s {
+			height: 200px;
+			background-color: #FFFFFF;
+			transform-origin: 50% 0%;
+			transform: rotate(180deg);
+		}
 
-			#zhen>#h {
-				height: 130px;
-				background-color: red;
-				transform-origin: 50% 0%;
-				transform: rotate(180deg);
-			}
-		</style>
-	</head>
-	<body>
-		<div id="clock">
-			<div class="dot"></div>
-			<div id="zhen">
-				<div id="h"></div>
-				<div id="m"></div>
-				<div id="s"></div>
-			</div>
+		#zhen>#m {
+			height: 170px;
+			background-color: black;
+			transform-origin: 50% 0%;
+			transform: rotate(180deg);
+		}
+
+		#zhen>#h {
+			height: 130px;
+			background-color: red;
+			transform-origin: 50% 0%;
+			transform: rotate(180deg);
+		}
+	</style>
+</head>
+
+<body>
+	<div id="clock">
+		<div class="dot"></div>
+		<div id="zhen">
+			<div id="h"></div>
+			<div id="m"></div>
+			<div id="s"></div>
 		</div>
-		<script type="text/javascript">
-			let clock = document.querySelector('#clock');
+	</div>
+	<script type="text/javascript">
+		let clock = document.querySelector('#clock');
 
-			for (let num = 1; num <= 12 * 5; num++) {
-				let div = document.createElement('div');
-				if (num % 5 == 0) {
-					div.classList.add('needleBig');
-					div.style.transform = `rotate(${num*6}deg)`;
-				} else {
-					div.classList.add('needleSmall');
-					div.style.transform = `rotate(${num*6}deg)`;
-				}
-				clock.appendChild(div);
+		for (let num = 1; num <= 12 * 5; num++) {
+			let div = document.createElement('div');
+			if (num % 5 == 0) {
+				div.classList.add('needleBig');
+				div.style.transform = `rotate(${num * 6}deg)`;
+			} else {
+				div.classList.add('needleSmall');
+				div.style.transform = `rotate(${num * 6}deg)`;
 			}
+			clock.appendChild(div);
+		}
 
-			// 秒针 1s 转 6deg
-			// 分针 1h=3600s 转 360deg =>1s 转 0.1deg
-			// 时针 3600s 转 30deg => 1s 转 0.0083deg
-			setInterval(() => {
-				let now = new Date();
-				let h = now.getHours();
-				let m = now.getMinutes();
-				let s = now.getSeconds();
-				document.querySelector('#s').style.transform = 'rotate(' + (180 + (s * 6)) + 'deg)';
-				document.querySelector('#m').style.transform = 'rotate(' + (180 + ((m * 60 + s) * 0.1)) + 'deg)';
-				document.querySelector('#h').style.transform = 'rotate(' + (180 + ((h * 3600 + m * 60 + s) * 0.0083)) +
-					'deg)';
-			}, 500);
-		</script>
-	</body>
+		// 秒针 1s 转 6deg
+		// 分针 1h=3600s 转 360deg =>1s 转 0.1deg
+		// 时针 3600s 转 30deg => 1s 转 0.0083deg
+		setInterval(() => {
+			let now = new Date();
+			let h = now.getHours();
+			let m = now.getMinutes();
+			let s = now.getSeconds();
+			document.querySelector('#s').style.transform = 'rotate(' + (180 + (s * 6)) + 'deg)';
+			document.querySelector('#m').style.transform = 'rotate(' + (180 + ((m * 60 + s) * 0.1)) + 'deg)';
+			document.querySelector('#h').style.transform = 'rotate(' + (180 + ((h * 3600 + m * 60 + s) * 0.0083)) +
+				'deg)';
+		}, 500);
+	</script>
+</body>
+
 </html>
